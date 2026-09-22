@@ -363,10 +363,8 @@ footer a{color:#C5D1DB}
 </footer>
 
 <script>
-  // ======= CONFIGURAÇÃO: troque só estas duas linhas =======
-  const CHECKOUT_URL = "";
+  const CHECKOUT_URL = "https://pay.cakto.com.br/39z4gvo_1128239";
   const EMAIL_CONTATO = "looksmaxingcomciencia@gmail.com";
-  // ==========================================================
   if (CHECKOUT_URL.startsWith("http")) {
     document.querySelectorAll(".js-checkout").forEach(a => { a.href = CHECKOUT_URL; a.rel = "noopener"; });
   }
