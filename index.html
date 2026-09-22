@@ -140,6 +140,49 @@ footer a{color:#C5D1DB}
   .offer{padding:26px 20px}
   .btn{width:100%}
 }
+
+/* ===== UPGRADE: cor, movimento, conversão ===== */
+:root{--cta1:#22C39F;--cta2:#14A37F;--gold:#F5B942}
+.btn{background:linear-gradient(135deg,var(--cta1),var(--cta2));position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(34,195,159,.35)}
+.btn:hover{background:linear-gradient(135deg,#27D3AD,#119172)}
+.btn:after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+.btn .arrow{transition:transform .2s}.btn:hover .arrow{transform:translateX(4px)}
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 10px 30px rgba(34,195,159,.35)}50%{box-shadow:0 10px 44px rgba(34,195,159,.65)}}
+.stack img{transition:transform .4s}
+.stack .c0{animation:float 6s ease-in-out infinite}
+.stack .c1{animation:floatL 7s ease-in-out infinite}
+.stack .c2{animation:floatR 7.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatL{0%,100%{transform:rotate(-7deg) translateY(0)}50%{transform:rotate(-8deg) translateY(-6px)}}
+@keyframes floatR{0%,100%{transform:rotate(7deg) translateY(0)}50%{transform:rotate(8deg) translateY(-6px)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.badges span{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:#C5D1DB;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:6px 12px;border-radius:999px}
+.hl{background:linear-gradient(transparent 62%,rgba(245,185,66,.45) 62%);padding:0 2px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
+.compare div{border-radius:var(--radius);padding:24px;border:1px solid var(--line);background:#fff}
+.compare .bad h3{color:#B23A30}.compare .good{border:2px solid var(--acc)}.compare .good h3{color:var(--acc-d)}
+.compare ul{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}
+.compare li{padding-left:28px;position:relative;font-size:15.5px}
+.compare .bad li:before{content:"✕";position:absolute;left:0;color:#D9544A;font-weight:800}
+.compare .good li:before{content:"✓";position:absolute;left:0;color:var(--acc);font-weight:800}
+.stackval{margin:10px 0 4px;text-align:left;border-top:1px dashed var(--line)}
+.stackval div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.stackval b{color:var(--acc-d);white-space:nowrap}
+.parc{font-size:15px;color:var(--muted);margin:2px 0 0}
+.parc strong{color:var(--text)}
+.launch{display:none;background:#FFF6E3;border:1px solid #F5D48A;color:#7A5200;border-radius:10px;padding:10px 14px;font-size:14.5px;font-weight:600;margin:14px 0 0}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(18,27,36,.96);backdrop-filter:blur(6px);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .35s ease;border-top:1px solid #2C3B49}
+.sticky.show{transform:none}
+.sticky .p{color:#fff;font-weight:800;font-size:18px;line-height:1.1}
+.sticky .p small{display:block;font-size:12px;font-weight:600;color:#8FA2B1}
+.sticky .btn{width:auto;padding:13px 20px;font-size:16px}
+@media (min-width:861px){.sticky{display:none}}
+@media (max-width:860px){.compare{grid-template-columns:1fr}footer{padding-bottom:110px}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -158,8 +201,8 @@ footer a{color:#C5D1DB}
         <li>Treino simples em casa, sem academia</li>
         <li>O que a ciência diz sobre mewing, mastic gum, colágeno e outros</li>
       </ul>
-      <a class="btn js-checkout" href="#oferta">Quero o protocolo</a>
-      <p class="micro">PDF · acesso imediato por e-mail · garantia de 7 dias</p>
+      <a class="btn pulse js-checkout" href="#oferta">Quero começar hoje por R$ 27 <span class="arrow">→</span></a>
+      <div class="badges"><span>🔒 Pagamento seguro</span><span>⚡ Acesso imediato</span><span>🛡️ Garantia de 7 dias</span></div>
     </div>
     <div class="stack" aria-hidden="true">
       <img class="c1" src="assets/capa-bonus1.jpg" alt="">
@@ -170,7 +213,7 @@ footer a{color:#C5D1DB}
 </header>
 
 <!-- PROBLEMA -->
-<section>
+<section class="reveal">
   <div class="wrap narrow center">
     <div class="kicker">Você já viu isso</div>
     <h2>A internet promete mudar seu rosto em semanas</h2>
@@ -182,8 +225,41 @@ footer a{color:#C5D1DB}
   </div>
 </section>
 
+<!-- COMPARAÇÃO -->
+<section class="reveal" style="padding-top:0">
+  <div class="wrap">
+    <div class="center narrow">
+      <div class="kicker">A diferença</div>
+      <h2>Dois caminhos para cuidar da aparência</h2>
+    </div>
+    <div class="compare">
+      <div class="bad">
+        <h3>O caminho da internet</h3>
+        <ul>
+          <li>Um método viral novo toda semana</li>
+          <li>Gastar com suplementos e aparelhos sem prova</li>
+          <li>Rotinas de 10 passos que ninguém mantém</li>
+          <li>Promessas de mudar o rosto em dias</li>
+          <li>Riscos que ninguém conta</li>
+        </ul>
+      </div>
+      <div class="good">
+        <h3>O caminho do Protocolo</h3>
+        <ul>
+          <li>Só o que tem evidência científica</li>
+          <li>Rotina de 15 minutos de manhã e 15 à noite</li>
+          <li>Treino em casa, sem gastar com academia</li>
+          <li>Uma tarefa pequena por dia, durante 30 dias</li>
+          <li>Você sabe exatamente o que esperar, e quando</li>
+        </ul>
+      </div>
+    </div>
+    <div class="center mt"><a class="btn js-checkout" href="#oferta">Quero o caminho que funciona <span class="arrow">→</span></a></div>
+  </div>
+</section>
+
 <!-- O QUE VOCÊ RECEBE -->
-<section class="soft">
+<section class="soft reveal">
   <div class="wrap">
     <div class="center narrow">
       <div class="kicker">O que você recebe</div>
@@ -231,7 +307,7 @@ footer a{color:#C5D1DB}
 </section>
 
 <!-- AMOSTRA -->
-<section>
+<section class="reveal">
   <div class="wrap">
     <div class="center narrow">
       <div class="kicker">Por dentro</div>
@@ -246,7 +322,7 @@ footer a{color:#C5D1DB}
 </section>
 
 <!-- COMO FUNCIONA -->
-<section class="soft">
+<section class="soft reveal">
   <div class="wrap">
     <div class="center narrow">
       <div class="kicker">Como funciona</div>
@@ -261,7 +337,7 @@ footer a{color:#C5D1DB}
 </section>
 
 <!-- PARA QUEM -->
-<section>
+<section class="reveal">
   <div class="wrap">
     <div class="center narrow">
       <div class="kicker">Seja sincero</div>
@@ -291,7 +367,7 @@ footer a{color:#C5D1DB}
 </section>
 
 <!-- DIFERENCIAL -->
-<section class="dark">
+<section class="dark reveal">
   <div class="wrap narrow">
     <div class="kicker">O diferencial</div>
     <h2>Cada afirmação vem com o nível de evidência</h2>
@@ -314,7 +390,9 @@ footer a{color:#C5D1DB}
     <div class="offer">
       <div class="kicker" style="color:var(--muted)">Pagamento único</div>
       <div class="price"><small>R$</small>27</div>
-      <p class="micro" style="margin-top:0">ou parcelado no cartão</p>
+      <p class="parc js-parc">ou parcelado no cartão</p>
+      <p class="parc">Menos do que muito suplemento "milagroso" que não tem evidência.</p>
+      <div class="launch js-launch"></div>
       <ul>
         <li>Protocolo 30 Dias (29 páginas)</li>
         <li>Bônus 1: Looksmaxing sem mitos (11 páginas)</li>
@@ -322,7 +400,7 @@ footer a{color:#C5D1DB}
         <li>Checklist de 30 dias e tabela de acompanhamento</li>
         <li>Acesso imediato na área de membros</li>
       </ul>
-      <a class="btn block js-checkout" href="#oferta">Quero o protocolo agora</a>
+      <a class="btn block pulse js-checkout" href="#oferta">Quero o protocolo agora <span class="arrow">→</span></a>
       <p class="micro">Pagamento seguro via Cakto · Pix, cartão ou boleto</p>
       <div class="guarantee">
         <svg viewBox="0 0 48 48" fill="none" stroke="#1BA38A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10z"/><path d="M16 24l6 6 10-12"/></svg>
@@ -333,7 +411,7 @@ footer a{color:#C5D1DB}
 </section>
 
 <!-- FAQ -->
-<section>
+<section class="reveal">
   <div class="wrap narrow">
     <div class="center"><div class="kicker">Dúvidas</div><h2>Perguntas frequentes</h2></div>
     <div class="mt">
@@ -344,6 +422,7 @@ footer a{color:#C5D1DB}
       <details><summary>Fala sobre mewing e outros métodos?</summary><p>Sim. O Bônus 1 analisa 13 métodos populares, entre eles mewing, mastic gum, aparelhos de mandíbula, exercícios faciais, fita na boca, colágeno, biotina e óleo de alecrim, com o que os estudos mostram sobre cada um.</p></details>
       <details><summary>Isso substitui médico, dentista ou nutricionista?</summary><p>Não. O material é educativo. O Bônus 2 mostra justamente quando procurar um profissional e como verificar se ele é habilitado.</p></details>
       <details><summary>Como recebo o material?</summary><p>Logo após a confirmação do pagamento, você recebe por e-mail o acesso à área de membros, onde estão os 3 PDFs para ler ou baixar.</p></details>
+      <details><summary>Por que um preço tão baixo?</summary><p>Porque é um material digital, direto ao ponto, feito para ser acessível. A ideia é que o dinheiro que você economizar com métodos sem evidência vá para o que funciona: protetor solar, um bom corte de cabelo, uma consulta com dermatologista.</p></details>
       <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias de garantia. É só pedir o reembolso nesse prazo.</p></details>
     </div>
     <div class="center mt">
@@ -352,6 +431,11 @@ footer a{color:#C5D1DB}
     </div>
   </div>
 </section>
+
+<div class="sticky js-sticky" aria-hidden="true">
+  <div class="p">R$ 27<small class="js-parc-short">acesso imediato</small></div>
+  <a class="btn js-checkout" href="#oferta">Quero o protocolo</a>
+</div>
 
 <footer>
   <div class="wrap">
@@ -365,6 +449,12 @@ footer a{color:#C5D1DB}
 <script>
   const CHECKOUT_URL = "https://pay.cakto.com.br/39z4gvo_1128239";
   const EMAIL_CONTATO = "looksmaxingcomciencia@gmail.com";
+  const PARCELAMENTO = "6x de R$ 5,17";
+  // Preço de lançamento: só preencha se você REALMENTE for aumentar o preço nessa data.
+  // Ex.: PRECO_DEPOIS = "37"; FIM_LANCAMENTO = "2026-10-15"  (deixe "" para não mostrar)
+  const PRECO_DEPOIS = "";
+  const FIM_LANCAMENTO = "";
+  // ==========================================================
   if (CHECKOUT_URL.startsWith("http")) {
     document.querySelectorAll(".js-checkout").forEach(a => { a.href = CHECKOUT_URL; a.rel = "noopener"; });
   }
@@ -372,6 +462,24 @@ footer a{color:#C5D1DB}
     document.querySelectorAll(".js-email").forEach(a => { a.href = "mailto:" + EMAIL_CONTATO; a.textContent = EMAIL_CONTATO; });
   }
   document.getElementById("ano").textContent = new Date().getFullYear();
+  if (PARCELAMENTO) {
+    document.querySelectorAll(".js-parc").forEach(e => e.innerHTML = "ou <strong>" + PARCELAMENTO + "</strong> no cartão");
+    document.querySelectorAll(".js-parc-short").forEach(e => e.textContent = "ou " + PARCELAMENTO);
+  }
+  if (PRECO_DEPOIS && FIM_LANCAMENTO) {
+    const fim = new Date(FIM_LANCAMENTO + "T23:59:59");
+    if (new Date() <= fim) {
+      const d = fim.toLocaleDateString("pt-BR", {day:"2-digit", month:"2-digit"});
+      document.querySelectorAll(".js-launch").forEach(e => { e.textContent = "Preço de lançamento até " + d + ". Depois, R$ " + PRECO_DEPOIS + "."; e.style.display = "block"; });
+    }
+  }
+  // animação ao rolar
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold: .12});
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  // barra fixa no celular
+  const sticky = document.querySelector(".js-sticky"), hero = document.querySelector(".hero"), oferta = document.getElementById("oferta");
+  const upd = () => { const h = hero.getBoundingClientRect().bottom < 0; const o = oferta.getBoundingClientRect(); const inOffer = o.top < innerHeight && o.bottom > 0; sticky.classList.toggle("show", h && !inOffer); };
+  addEventListener("scroll", upd, {passive:true}); upd();
 </script>
 </body>
 </html>
